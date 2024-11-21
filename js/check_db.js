@@ -1,1 +1,0 @@
-console.log("chequeando base de datos")

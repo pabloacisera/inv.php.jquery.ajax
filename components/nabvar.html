@@ -22,11 +22,27 @@
           </ul>
         </li>
 
-      </ul>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+      </ul> 
+      
+        <a class="btn btn-outline-success m-2" data-view="account">Perfil</a>
+      
+     
+        <a class="btn btn-outline-danger m-2" data-view="out">Salir</a>
+      
     </div>
   </div>
 </nav>
+/* Navbar fija en la parte superior */
+<style>
+  /* Navbar fija en la parte superior */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1050; /* Aseguramos que la navbar esté siempre por encima */
+    height: 70px;
+    background-color: #343a40;
+}
+
+</style>

@@ -4,7 +4,7 @@ try {
     $host = '127.0.0.1';          // Servidor de MySQL (puede ser localhost o la IP del servidor)
     $dbname = 'inventario';       // Nombre de tu base de datos MySQL
     $username = 'root';           // Tu nombre de usuario de MySQL
-    $password = 'nueva_contraseña';          // Tu contraseña de MySQL
+    $password = 'kayas';          // Tu contraseña de MySQL
     $port = 3306;                 // Puerto de MySQL (por defecto 3306)
 
     // Crear la conexión a MySQL usando PDO, incluyendo el puerto en el DSN
