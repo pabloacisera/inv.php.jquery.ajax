@@ -1,20 +1,172 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inventify - inventarios personalizados</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <title>Inventario</title>
+
+    <!-- Vinculamos el CSS de Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <style>
+        /* Estilos adicionales para una vista profesional del dashboard */
+        body {
+            display: flex;
+            min-height: 100vh;
+            margin: 0;
+            flex-direction: row;
+        }
+
+        /* Barra lateral */
+        .sidebar {
+            height: 100%;
+            width: 250px;
+            background-color: #343a40;
+            padding-top: 20px;
+            position: fixed;
+            transition: width 0.3s;
+        }
+
+        .sidebar a {
+            color: #ffffff;
+            text-decoration: none;
+            padding: 10px 15px;
+            display: block;
+            font-size: 16px;
+            margin: 8px 0;
+        }
+
+        .sidebar a:hover {
+            background-color: #495057;
+            border-radius: 5px;
+        }
+
+        /* Área principal del contenido */
+        .content {
+            margin-left: 250px;
+            padding: 20px;
+            flex: 1;
+            background-color: #f8f9fa;
+        }
+
+        .select-box {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        select {
+            font-size: 16px;
+            padding: 10px;
+            width: 100%;
+            background-color: #ffffff;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        select:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        option {
+            font-size: 16px;
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        select option:first-child {
+            color: gray;
+            font-style: italic;
+        }
+
+        #logo {
+            cursor: pointer;
+        }
+    </style>
 </head>
+
 <body>
-    <?php
-        include "components/nabvar.html";
-    ?>
+    <!-- Barra lateral -->
+    <div class="sidebar" id="sidebar">
+        <div class="container">
+            <h2 class="text-white text-center" id="logo" onclick="resetApp()">INVENTIFY</h2>
+            <div>
+                <a href="#" onclick="renderSection('products')">Productos</a>
+                <a href="#" onclick="renderSection('clients')">Clientes</a>
+            </div>
+        </div>
+    </div>
 
-    <div class="primary-container"></div>
+    <!-- Área de contenido -->
+    <div class="content">
+        <!-- Botón hamburguesa en dispositivos pequeños -->
+        <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar"
+            aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script src="js/app.js"></script>
+        <div id="render-content">
+            <!-- Aquí se renderizarán las opciones según la selección -->
+        </div>
+    </div>
+
+    <!--area de renderizado de php-->
+    <section class="template">
+
+    </section>
+
+    <!-- Scripts de Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+    <script>
+        // Función para renderizar el contenido de acuerdo con la selección
+        function renderSection(section) {
+            const renderContent = document.getElementById('render-content');
+
+            // Limpiar cualquier contenido previamente cargado
+            renderContent.innerHTML = '';
+
+            if (section === 'products') {
+                renderContent.innerHTML = `
+        <h1 id="main-title">Gestión de Productos</h1>
+        <select name="products" id="products" class="select-box" attr-data="products">
+        <option disabled selected>CATEGORIA PRODUCTOS</option>
+        <option value="list_products" attr-value="list_products">Listado de productos</option>
+        <option value="new_product" attr-value="new_product">Nuevo producto</option>
+        </select>
+
+    `;
+            } else if (section === 'clients') {
+                renderContent.innerHTML = `
+        <h1 id="main-title">Gestión de Clientes</h1>
+        <select name="clients" id="clients" class="select-box" attr-data="clients">
+            <option disabled selected>CATEGORIA CLIENTES</option>
+            <option value="list_clients" attr-value="list_clients">Listado de clientes</option>
+            <option value="new_client" attr-value="new_client">Nuevo cliente</option>
+        </select>
+    `;
+            }
+
+        }
+
+        // Función para reiniciar la vista a su estado inicial
+        function resetApp() {
+            const renderContent = document.getElementById('render-content');
+            renderContent.innerHTML = ``;
+        }
+    </script>
+    <script src="/inventify/javascript/index.js"></script>
 </body>
+
 </html>
