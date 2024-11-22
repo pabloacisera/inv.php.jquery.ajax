@@ -8,7 +8,7 @@ function loadTemplate(route, file) {
         },
         success: function (r) {
             let template = JSON.parse(r);
-            console.log('respuesta parseada')
+            console.log('respuesta parseada: ', template)
             // Asegúrate de que la respuesta tiene los campos esperados
             if (template.archivo) {
                 $('.template').html(template.archivo);  // Insertar el contenido HTML en el contenedor de la plantilla

@@ -1,1 +1,67 @@
-esto es un login pero si queremos podemor ir al  <a href="#" class="register" route="pages" file="register">registro</a>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+
+    .login-container {
+        background-color: #fff;
+        padding: 40px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 300px;
+        text-align: center;
+    }
+
+    .login-container h2 {
+        margin-bottom: 20px;
+    }
+
+    .login-container input {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+
+    .login-container button {
+        width: 100%;
+        padding: 10px;
+        background-color: #4CAF50;
+        border: none;
+        color: white;
+        font-size: 16px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .login-container button:hover {
+        background-color: #45a049;
+    }
+</style>
+<div class="login-container">
+    <p id="loginError"></p>
+    <h2>Iniciar sesión</h2>
+    <form id="loginForm">
+        <input type="text" id="username" placeholder="Usuario" required><br>
+        <input type="password" id="password" placeholder="Contraseña" required><br>
+        <button type="submit">Entrar</button>
+    </form>
+</div>
+
+
+
+
+
+
+
+
+
+<a href="#" class="register" route="pages" file="register">registro</a>
