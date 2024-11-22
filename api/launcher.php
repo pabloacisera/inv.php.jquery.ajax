@@ -1,26 +1,44 @@
 <?php
-    // Verificar que los datos han sido enviados por POST
-    if (isset($_POST['attr-data']) && isset($_POST['attr-value'])) {
-        $folder = $_POST['attr-data'];  // Obtener el valor de 'attr-data'
-        $file = $_POST['attr-value'];   // Obtener el valor de 'attr-value'
+if (isset($_POST['route']) && isset($_POST['file'])) {
+    $route = $_POST['route'];
+    $file = $_POST['file'];
 
-        // Crear la ruta del archivo
-        $filePath = '../pages/' . $folder . '/' . $file . '.html';
+    // Concatenamos la ruta completa del archivo HTML
+    $object = __DIR__ . '/../' . $route . '/' . $file . '.html';
 
-        // Verificar si el archivo existe
-        if (file_exists($filePath)) {
+    // Verificamos si el archivo HTML existe
+    if (is_file($object) && pathinfo($object, PATHINFO_EXTENSION) === 'html') {
+        // Leemos el contenido del archivo HTML
+        $fileContent = file_get_contents($object);
 
-            // Capturar el archivo en una variante
-            $template = file_get_contents($filePath);
-            $template = htmlspecialchars($template);
+        // Concatenamos la ruta completa del archivo JS
+        $js = __DIR__ . '/../javascript/' . $file . '.js';
 
-            // Si existe, devolver la ruta del archivo
-            echo json_encode(['route' => $filePath, 'template' => $template]);
+        // Verificamos si el archivo JS existe antes de leerlo
+        if (is_file($js)) {
+            $fileJs = file_get_contents($js);
         } else {
-            // Si el archivo no existe, devolver un error
-            echo json_encode(['error' => 'El archivo no existe.']);
+            $fileJs = ''; // Si no existe el archivo JS, dejamos el valor vacío
         }
+
+        // Devolvemos el contenido HTML y JS en formato JSON
+        echo json_encode([
+            "ruta" => $route . '/' . $file,  // Asegúrate de devolver la ruta completa
+            "archivo" => $fileContent,      // Contenido HTML
+            "js" => $fileJs                 // Contenido JS
+        ], JSON_UNESCAPED_UNICODE);
+
     } else {
-        echo json_encode(['error' => 'Datos incompletos.']);
+        // En caso de error, enviar una respuesta JSON con un mensaje de error
+        echo json_encode([
+            "error" => "La ruta, nombre o extensión del archivo no existe en la aplicación."
+        ], JSON_UNESCAPED_UNICODE);
     }
+} else {
+    // En caso de falta de parámetros, enviar un mensaje de error
+    echo json_encode([
+        "error" => "El parámetro de ruta o archivo no existe en la aplicación."
+    ], JSON_UNESCAPED_UNICODE);
+}
 ?>
+
