@@ -1,0 +1,10 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* O puedes usar overflow-x: hidden o overflow-y: hidden dependiendo del caso */
+  }
+  
+  * {
+    box-sizing: border-box; /* Asegura que los márgenes y bordes no agreguen extra al tamaño de los elementos */
+  }
+  

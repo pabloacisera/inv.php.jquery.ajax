@@ -1,1 +1,0 @@
-console.log('el js del home esta cargado')
