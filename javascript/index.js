@@ -1,6 +1,6 @@
-// Importamos la función 'loadTemplate' desde router.js
-import loadTemplate from './router.js';
-import getCookie from './getCookie.js';
+import loadTemplate from './router.js';  // Asegúrate de que la ruta esté bien especificada
+import getCookie from './getCookie.js';  // Y lo mismo para getCookie.js
+
 
 $(document).ready(function () {
     // Obtener el valor de la cookie 'db'

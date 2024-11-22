@@ -12,20 +12,13 @@ if (isset($_POST['route']) && isset($_POST['file'])) {
         $fileContent = file_get_contents($object);
 
         // Concatenamos la ruta completa del archivo JS
-        $js = __DIR__ . '/../javascript/' . $file . '.js';
-
-        // Verificamos si el archivo JS existe antes de leerlo
-        if (is_file($js)) {
-            $fileJs = file_get_contents($js);
-        } else {
-            $fileJs = ''; // Si no existe el archivo JS, dejamos el valor vacío
-        }
+        $js = '/inventify/javascript/' . $file . '.js';
 
         // Devolvemos el contenido HTML y JS en formato JSON
         echo json_encode([
             "ruta" => $route . '/' . $file,  // Asegúrate de devolver la ruta completa
             "archivo" => $fileContent,      // Contenido HTML
-            "js" => $fileJs                 // Contenido JS
+            "js" => $js                // Contenido JS
         ], JSON_UNESCAPED_UNICODE);
 
     } else {

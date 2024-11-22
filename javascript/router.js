@@ -1,7 +1,7 @@
 function loadTemplate(route, file) {
     $.ajax({
         url: "/inventify/api/launcher.php",
-        type: "POST", 
+        type: "POST",
         data: {
             "route": route,
             "file": file
@@ -34,9 +34,10 @@ function loadTemplate(route, file) {
             // Cargar y ejecutar el JS correspondiente
             if (template.js) {
                 let script = document.createElement('script');
-                script.type = 'text/javascript';
-                script.text = template.js;
+                script.type = 'module';
+                script.src = template.js;  // Aquí template.js debería tener una ruta válida
                 document.body.appendChild(script);
+
             }
         },
         error: function (xhr, status, error) {
